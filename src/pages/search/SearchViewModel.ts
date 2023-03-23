@@ -27,7 +27,7 @@ export default class SearchViewModel implements SearchType {
     });
   }
 
-  public search = async (value: any) => {
+  public search = async (value: string) => {
     this.searchValue = value;
     const response = await this.apiService.get();
     response.data = this.formatListService.formatList(response.data);
