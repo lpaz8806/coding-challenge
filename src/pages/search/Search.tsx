@@ -87,4 +87,4 @@ function filteredData(response: any, param: string, value: string) {
   return response.data.filter((item: any) => {
     return item[param].toLowerCase().includes(value.toLowerCase());
   });
-};
+}
