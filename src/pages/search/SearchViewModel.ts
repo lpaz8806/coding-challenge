@@ -9,7 +9,7 @@ export type SearchType = {
 }
 
 /**
- * View model used for {@link Search} component.
+ * View model used for {@link SearchResultsPage} component.
  */
 @injectable()
 export default class SearchViewModel implements SearchType {
