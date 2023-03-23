@@ -36,49 +36,56 @@ function SearchResultsPage({ viewModel }:{ viewModel: SearchType | undefined }):
 
   var selected:boolean = false;
 
-  return <Observer>{() => <Box>
-    <Grid container spacing={2}>
-    <Grid item md={4}>
+  return <Observer>{() =>
+    <Box>
+      <Grid container spacing={2}>
+        <Grid item md={4}>
+          <Stack direction="row">
+            <TextField
+              id="outlined-basic"
+              label="Search for an article"
+              variant="outlined"
+              value={model.searchValue}
+              onChange={updateTextValue}
+            />
+            <Button style={ButtonStyle} sx={{ marginLeft: 2 }} variant="contained" onClick={onSearch}>Search</Button>
+          </Stack>
 
-    <Stack direction="row">
+          {selected &&
+          <Box marginTop={2}>
+            <Paper sx={{ padding: 2 }}>
+              <strong>Title</strong>
+              <p>description</p>
+              <p style={{ float: 'right'}}>price</p>
+              <div style={{ clear: 'both'}}></div>
+            </Paper>
+          </Box>}
+        </Grid>
 
-    <TextField
-      id="outlined-basic"
-      label="Search for an article"
-      variant="outlined"
-      value={model.searchValue}
-      onChange={updateTextValue}
-    />
-    <Button style={ButtonStyle} sx={{ marginLeft: 2 }} variant="contained" onClick={onSearch}>Search</Button>
-    </Stack>
-    {selected && <Box marginTop={2}><Paper sx={{ padding: 2 }}>
-      <strong>Title</strong>
-      <p>description</p>
-      <p style={{ float: 'right'}}>price</p>
-      <div style={{ clear: 'both'}}></div>
-    </Paper></Box>}
-    </Grid>
-    <Grid item md={8}>
+        <Grid item md={8}>
+          <Box alignItems="center" flexGrow={1}>
+            <Typography align="center" variant="h5">Search results</Typography>
+           </Box>
 
-      <Box alignItems="center" flexGrow={1}>
-        <Typography align="center" variant="h5">Search results</Typography>
-       </Box>
-      {!results && <Box>No results</Box>}
-      {<List>
+          {!results &&
+          <Box>No results</Box>}
+
+          <List>
           {(results) && results.data.map((result: any) => (
             <ListItem>
-               <ListItemAvatar>
-              <Avatar>
-                <ImageIcon />
-              </Avatar>
-            </ListItemAvatar>
+              <ListItemAvatar>
+                <Avatar>
+                  <ImageIcon />
+                </Avatar>
+              </ListItemAvatar>
               <ListItemText primary={result.title} secondary={result.description} />
             </ListItem>
           ))}
-        </List>}
+          </List>
+        </Grid>
       </Grid>
-    </Grid>
-    </Box>}</Observer>;
+    </Box>}
+  </Observer>;
 }
 
 export default withInstances({ viewModel: 'SEARCH_PAGE' }, SearchResultsPage);
