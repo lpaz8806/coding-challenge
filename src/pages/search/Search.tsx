@@ -3,8 +3,9 @@ import { Observer } from 'mobx-react-lite';
 import { ReactElement, useState } from 'react';
 import { appContainer } from '../../Composition/AppContainer';
 import { withInstances } from '../../utils/withInstances';
-import { SearchType } from './SearchViewModel';
+import SearchViewModel from './SearchViewModel';
 import ImageIcon from '@mui/icons-material/Image';
+import {SearchType} from "../../types/SearchType";
 
 // class to style button component
 const ButtonStyle = {
@@ -20,7 +21,7 @@ function SearchResultsPage({ viewModel }:{ viewModel: SearchType | undefined }):
   const [value, setValue] = useState<any>(viewModel?.searchValue);
   const [results, setResults] = useState({ data: []});
   
-  let model = appContainer.get<any>('SEARCH_PAGE');
+  const model: SearchViewModel = appContainer.get<SearchViewModel>('SEARCH_PAGE');
 
   function updateTextValue (e:any) {
     setValue(model.searchValue = e.target.value);

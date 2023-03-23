@@ -2,12 +2,7 @@ import { inject, injectable } from 'inversify';
 import { action, makeObservable, observable } from 'mobx';
 import type ApiServiceType from '../../service/ApiService';
 import type FormatListService from "../../service/FormatList";
-
-export type SearchType = {
-  searchValue: string;
-  searchResults: Array<any>;
-  search: (value: string) => void;
-}
+import {SearchType} from "../../types/SearchType";
 
 /**
  * View model used for {@link SearchResultsPage} component.
