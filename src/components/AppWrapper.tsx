@@ -1,8 +1,7 @@
 
-import { alpha, AppBar, Box, Container, IconButton, InputBase, Paper, styled, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Container, IconButton, Paper, Toolbar, Typography } from '@mui/material';
 import { Link, Outlet } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 import getAddressTitle from '../utils/getTitle';
 
 function AppWrapper() {
