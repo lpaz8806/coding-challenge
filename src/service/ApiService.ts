@@ -18,14 +18,6 @@ export interface ApiServiceType {
 
 @injectable()
 export default class ApiService implements ApiServiceType {
-  private static instance: ApiService;
-  
-  static get initialized(): ApiService {
-    if (!ApiService.instance) {
-      this.instance = new ApiService();
-    }
-    return this.instance;
-  }
 
   public get = async (): Promise<ApiResponseType> => {
     return mockData;
