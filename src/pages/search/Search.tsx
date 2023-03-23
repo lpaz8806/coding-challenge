@@ -27,7 +27,7 @@ function SearchResultsPage({ viewModel }:{ viewModel: SearchType | undefined }):
   }
 
   const onSearch = async () => {
-    var resp = await model.search(value);
+    const resp = await model.search(value);
     const newData = {
       data: filteredData(resp, 'title', value),
     }
