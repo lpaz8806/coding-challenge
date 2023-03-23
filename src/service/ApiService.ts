@@ -18,19 +18,7 @@ export interface ApiServiceType {
 
 @injectable()
 export default class ApiService implements ApiServiceType {
-
   public get = async (): Promise<ApiResponseType> => {
     return mockData;
-  }
-
-  public filtered = async (value: string, param: string): Promise<ApiResponseType> => {
-    const response = await this.get();
-    const filteredData = response.data.filter((item: any) => {
-      return item[param].toLowerCase().includes(value.toLowerCase());
-    });
-    return {
-      data: filteredData,
-      status: response.status,
-    };
   }
 }
