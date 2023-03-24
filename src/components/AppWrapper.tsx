@@ -1,11 +1,10 @@
-
 import { AppBar, Box, Container, IconButton, Paper, Toolbar, Typography } from '@mui/material';
 import { Link, Outlet } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import getAddressTitle from '../utils/getTitle';
 
 function AppWrapper() {
-  const title = getAddressTitle(document.location.href);
+  const title = getAddressTitle();
 
   return (
     <>

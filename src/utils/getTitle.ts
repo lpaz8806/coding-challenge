@@ -1,7 +1,8 @@
-const getAddressTitle = (address: string) => {
-  const path = document.location.href;
+import {useLocation} from "react-router-dom";
 
-  return path.split('/').pop();
+const getAddressTitle = () => {
+  const {pathname} = useLocation();
+  return pathname.split('/').pop();
 };
 
 export default getAddressTitle;
