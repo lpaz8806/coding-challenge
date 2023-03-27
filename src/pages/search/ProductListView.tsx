@@ -1,6 +1,6 @@
 import {ProductListItem} from "../../types/ProductListItem";
 import React, {ReactElement} from "react";
-import {Avatar, Box, List, ListItem, ListItemAvatar, ListItemText} from "@mui/material";
+import {Avatar, Box, List, ListItemAvatar, ListItemButton, ListItemText} from "@mui/material";
 import ImageIcon from "@mui/icons-material/Image";
 
 export type ProductListViewProps = {
@@ -12,16 +12,20 @@ export function ProductListView(props: ProductListViewProps): ReactElement {
         return <Box>No results</Box>
 
     const listItems = props.items.map(item => (
-        <ListItem key={item.id} onClick={() => props.onProductSelected(item)}>
+        <ListItemButton
+            key={item.id}
+            component={'li'}
+            onClick={() => props.onProductSelected(item)}
+        >
             <ListItemAvatar>
                 <Avatar>
                     <ImageIcon />
                 </Avatar>
             </ListItemAvatar>
-        <ListItemText
-            primary={item.title}
-            secondary={item.description} />
-    </ListItem>
+            <ListItemText
+                primary={item.title}
+                secondary={item.description} />
+        </ListItemButton>
     ));
 
     return (<List>{listItems}</List>)
