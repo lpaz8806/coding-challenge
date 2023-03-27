@@ -3,7 +3,7 @@ import React, {ReactElement} from "react";
 
 export type SearchBoxViewProps = {
     onSearchTermChange: (term: string) => void | null;
-    onSearchRequested: () => void | null;
+    onSearchRequested: () => Promise<void> | null;
 }
 export function SearchBoxView(props: SearchBoxViewProps) : ReactElement {
 
