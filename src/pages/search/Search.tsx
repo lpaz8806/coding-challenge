@@ -6,6 +6,7 @@ import {ProductListView} from "./ProductListView";
 import {SearchBoxView} from "./SearchBoxView";
 import {ProductPreviewView} from "./ProductPreviewView";
 import SearchViewModelType from "../../types/SearchViewModelType";
+import TYPES from "../../Composition/TYPES";
 
 export function Search({ viewModel }:{ viewModel: SearchViewModelType }): ReactElement {
   return <Observer>{() =>
@@ -34,4 +35,4 @@ export function Search({ viewModel }:{ viewModel: SearchViewModelType }): ReactE
   </Observer>;
 }
 
-export default withInstances({ viewModel: 'SEARCH_PAGE' }, Search);
+export default withInstances({ viewModel: TYPES.SearchPageViewModel }, Search);
