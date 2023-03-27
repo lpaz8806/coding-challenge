@@ -1,32 +1,42 @@
 import { inject, injectable } from 'inversify';
-import { action, makeObservable, observable } from 'mobx';
-import type ApiServiceType from '../../service/ApiService';
-import type FormatListService from "../../service/FormatList";
-import {SearchType} from "../../types/SearchType";
+import {makeAutoObservable} from 'mobx';
+import type ApiServiceType from "../../service/ApiService";
+import {ProductListItem} from "../../types/ProductListItem";
+import FormatListService from "../../service/FormatList";
+import SearchViewModelType from "../../types/SearchViewModelType";
 
 /**
- * View model used for {@link SearchResultsPage} component.
+ * View model used for {@link Search} component.
  */
 @injectable()
-export default class SearchViewModel implements SearchType {
-  public searchValue!: string;
-  public searchResults = [{}];
+export default class SearchViewModel implements SearchViewModelType {
+  public searchValue: string = "";
+  public searchResults: Array<ProductListItem> = [];
+  public selectedProduct: ProductListItem | null = null;
 
   constructor(
       @inject('FORMAT_LIST_SERVICE') private formatListService: FormatListService,
       @inject('API_SERVICE') private apiService: ApiServiceType,
   ) {
-    makeObservable(this, {
-      searchValue: observable,
-      search: action,
-    });
+    makeAutoObservable(this);
   }
 
-  public search = async (value: string) => {
+  public setSearchValue = (value: string) => {
     this.searchValue = value;
-    const response = await this.apiService.get();
-    response.data = this.formatListService.formatList(response.data);
-
-    return response;
   };
+
+  public setResults = (searchResults: Array<ProductListItem>) => this.searchResults = searchResults;
+
+  public setSelectedProduct = (selectedProduct: ProductListItem | null) => this.selectedProduct = selectedProduct;
+
+  public search = async () => {
+    const response = await this.apiService.get();
+    const data = this.formatListService.formatList(response.data);
+    const results = data.filter(item => contains(item.title, this.searchValue));
+    this.setResults(results);
+  };
+}
+
+function contains(text: string, pattern: string) : boolean {
+  return text.toLowerCase().includes(pattern.toLowerCase())
 }
